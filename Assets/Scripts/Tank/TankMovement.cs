@@ -16,7 +16,9 @@ public class TankMovement : MonoBehaviour
     private Rigidbody rb;         
     private float MovementInput;    
     private float TurnInput;        
-    private float OriginalPitch;         
+    private float OriginalPitch;
+
+    public TutorialPopup Tutorial;
 
 
     private void Awake()
@@ -60,6 +62,16 @@ public class TankMovement : MonoBehaviour
         TurnInput = Input.GetAxis(PlayerTurn);
 
         EngineAudio(); // Make sure the correct audio clip is playes based on the tank movement
+
+        if(MovementInput != 0)
+        {
+            Tutorial.HasMoved = true;
+        }
+
+        if (TurnInput != 0)
+        {
+            Tutorial.HasTurned = true;
+        }
     }
 
     

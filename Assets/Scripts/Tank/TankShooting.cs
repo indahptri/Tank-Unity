@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class TankShooting : MonoBehaviour
 {
     public int PlayerNumber = 1;       
-    public Rigidbody Shell; // Prefab of the shell           
+    public Rigidbody Shell; // Prefab of the shell
     public Transform FireTransform; // A child of the tank where the shells are spawned    
     public Slider AimSlider; // A child of the tank that displays the current launch force          
     public AudioSource ShootingAudio; 
@@ -20,6 +20,7 @@ public class TankShooting : MonoBehaviour
     private float ChargeSpeed; // How fast the launch force increases based on the max charge time        
     private bool Fired; // Whether or not the shell has been launched with this button press               
 
+    public TutorialPopup Tutorial;
 
     private void OnEnable()
     {
@@ -75,6 +76,11 @@ public class TankShooting : MonoBehaviour
         else if (Input.GetButtonUp(FireButton) && !Fired)
         {
             Fire();
+        }
+
+        if (Fired)
+        {
+            Tutorial.HasShoot = true;
         }
     }
 

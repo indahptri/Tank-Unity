@@ -10,7 +10,10 @@ public class TankManager // Manage various settings of a tank
     */
 
     public Color PlayerColor;            
-    public Transform SpawnPoint;         
+    public Transform SpawnPoint;
+    public Transform Camera;
+    public string MoveControlText;
+    public string ShootControlText;
     [HideInInspector] public int PlayerNumber;             
     [HideInInspector] public string ColoredPlayerText;
     [HideInInspector] public GameObject Instance; // Reference to the instance of the tank when it is created         
@@ -20,7 +23,7 @@ public class TankManager // Manage various settings of a tank
     private TankMovement Movement; // Reference to tank's movement script, used to disable and enable control      
     private TankShooting Shooting; // Reference to tank's shooting script, used to disable and enable control
     private GameObject CanvasGameObject; // Used to disable the world space UI during the starting and ending phases of each round
-
+    private TutorialPopup Tutorial;
 
     public void Setup()
     {
@@ -28,6 +31,7 @@ public class TankManager // Manage various settings of a tank
         Movement = Instance.GetComponent<TankMovement>();
         Shooting = Instance.GetComponent<TankShooting>();
         CanvasGameObject = Instance.GetComponentInChildren<Canvas>().gameObject;
+        Tutorial = Instance.GetComponent<TutorialPopup>();
 
         // Set the player numbers to be consistent across the scripts
         Movement.PlayerNumber = PlayerNumber;
@@ -44,7 +48,11 @@ public class TankManager // Manage various settings of a tank
         {
             renderers[i].material.color = PlayerColor; // Set the material color to match the current player color
         }
-        
+
+        Tutorial.Camera = Camera;
+        Tutorial.MoveControlText = MoveControlText;
+        Tutorial.ShootControlText = ShootControlText;
+
     }
 
 
