@@ -22,12 +22,16 @@ public class GameManager : MonoBehaviour
     private TankManager RoundWinner;
     private TankManager GameWinner;
 
+    public RectTransform EndScreen;
+
     // This line fixes a change to the physics engine
     private void Start()
     {
         // Create the delays so they only have to be made once        
         StartWait = new WaitForSeconds(StartDelay);
         EndWait = new WaitForSeconds(EndDelay);
+
+        EndScreen.gameObject.SetActive(false);
     }
 
     public void StartGame()
@@ -76,7 +80,10 @@ public class GameManager : MonoBehaviour
 
         if (GameWinner != null)
         {
-            Application.LoadLevel(Application.loadedLevel); // Restarts the level if there is a game winner
+            MessageText.text = string.Empty;
+
+            yield return null;
+            GameOver();
         }
         else
         {
@@ -200,9 +207,19 @@ public class GameManager : MonoBehaviour
         }
 
         if (GameWinner != null)
-            message = "GAME OVER\n\n" + GameWinner.ColoredPlayerText + " WINS THE GAME!";
+            message = GameWinner.ColoredPlayerText + " WINS THE GAME!";
 
         return message;
+    }
+
+    public void GameOver()
+    {
+        EndScreen.gameObject.SetActive(true);
+    }
+
+    public void Restart()
+    {
+        Application.LoadLevel(Application.loadedLevel); // Restarts the level if there is a game winner
     }
 
 

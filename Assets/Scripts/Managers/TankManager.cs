@@ -52,7 +52,6 @@ public class TankManager // Manage various settings of a tank
         Tutorial.Camera = Camera;
         Tutorial.MoveControlText = MoveControlText;
         Tutorial.ShootControlText = ShootControlText;
-
     }
 
 
