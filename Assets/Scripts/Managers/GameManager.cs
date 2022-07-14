@@ -28,14 +28,16 @@ public class GameManager : MonoBehaviour
         // Create the delays so they only have to be made once        
         StartWait = new WaitForSeconds(StartDelay);
         EndWait = new WaitForSeconds(EndDelay);
+    }
 
+    public void StartGame()
+    {
         SpawnAllTanks();
         SetCameraTargets();
 
         // Once tanks have been created and camera is using them as targets -> Start the game
         StartCoroutine(GameLoop());
     }
-
 
     private void SpawnAllTanks()
     {
@@ -198,7 +200,7 @@ public class GameManager : MonoBehaviour
         }
 
         if (GameWinner != null)
-            message = GameWinner.ColoredPlayerText + " WINS THE GAME!";
+            message = "GAME OVER\n\n" + GameWinner.ColoredPlayerText + " WINS THE GAME!";
 
         return message;
     }
